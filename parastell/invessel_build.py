@@ -239,10 +239,7 @@ class InVesselBuild(object):
         for name, surface in self.Surfaces.items():
             outer_surface = surface.generate_surface()
 
-            if interior_surface is not None:
-                segment = outer_surface.cut(interior_surface)
-            else:
-                segment = outer_surface
+            segment = outer_surface
 
             component = segment
 
@@ -287,20 +284,20 @@ class InVesselBuild(object):
                 prev_outer_surface_id = outer_surface_id
 
 
-    def export_step(self, export_dir=''):
+    def export_stl(self, export_dir=''):
         """Export CAD solids as STEP files via CadQuery.
 
         Arguments:
             export_dir (str): directory to which to export the STEP output files
                 (optional, defaults to empty string).
         """
-        self._logger.info('Exporting STEP files for in-vessel components...')
+        self._logger.info('Exporting STL files for in-vessel components...')
 
         self.export_dir = export_dir
 
         for name, component in self.Components.items():
             export_path = (
-                Path(self.export_dir) / Path(name).with_suffix('.step')
+                Path(self.export_dir) / Path(name).with_suffix('.stl')
             )
             cq.exporters.export(
                 component,

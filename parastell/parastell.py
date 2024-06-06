@@ -179,7 +179,7 @@ class Stellarator(object):
             export_dir (str): directory to which to export the output files
                 (optional, defaults to empty string).
         """
-        self.invessel_build.export_step(export_dir=export_dir)
+        self.invessel_build.export_stl(export_dir=export_dir)
 
         if export_cad_to_dagmc:
             self.invessel_build.export_cad_to_dagmc(
